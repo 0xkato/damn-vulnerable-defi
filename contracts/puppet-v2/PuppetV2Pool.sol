@@ -35,8 +35,13 @@ contract PuppetV2Pool {
         _uniswapFactory = uniswapFactoryAddress;
     }
 
+<<<<<<< Updated upstream
     /**
      * @notice Allows borrowing tokens by first depositing three times their value in WETH
+=======
+    /** 
+     * @notice Allows borrowing `borrowAmount` of tokens by first depositing three times their value in WETH
+>>>>>>> Stashed changes
      *         Sender must have approved enough WETH in advance.
      *         Calculations assume that WETH and borrowed token have same amount of decimals.
      */
