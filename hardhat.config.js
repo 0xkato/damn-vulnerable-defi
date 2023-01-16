@@ -2,6 +2,7 @@ require("@nomicfoundation/hardhat-chai-matchers");
 require("@nomiclabs/hardhat-ethers");
 require('@openzeppelin/hardhat-upgrades');
 require('hardhat-dependency-compiler');
+require("@nomiclabs/hardhat-web3");
 
 module.exports = {
     networks: {
