@@ -6,8 +6,14 @@ describe('[Challenge] Side entrance', function () {
     let deployer, player;
     let pool;
 
+<<<<<<< Updated upstream
     const ETHER_IN_POOL = 1000n * 10n ** 18n;
     const PLAYER_INITIAL_ETH_BALANCE = 1n * 10n ** 18n;
+=======
+    let deployer, attacker; 
+
+    const ETHER_IN_POOL = ethers.utils.parseEther('1000');
+>>>>>>> Stashed changes
 
     before(async function () {
         /** SETUP SCENARIO - NO NEED TO CHANGE ANYTHING HERE */
@@ -24,8 +30,15 @@ describe('[Challenge] Side entrance', function () {
 
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+=======
+    it('Exploit', async function () {
+        const AttackFactory = await ethers.getContractFactory('SideEntranceAttack', attacker);
+        const AttackContract = await AttackFactory.deploy(this.pool.address);
+        await AttackContract.attack();
+>>>>>>> Stashed changes
     });
 
     after(async function () {
