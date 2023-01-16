@@ -5,8 +5,13 @@ describe('[Challenge] Truster', function () {
     let deployer, player;
     let token, pool;
 
+<<<<<<< Updated upstream
     const TOKENS_IN_POOL = 1000000n * 10n ** 18n;
 
+=======
+    const TOKENS_IN_POOL = ethers.utils.parseEther('1000000');
+ 
+>>>>>>> Stashed changes
     before(async function () {
         /** SETUP SCENARIO - NO NEED TO CHANGE ANYTHING HERE */
         [deployer, player] = await ethers.getSigners();
@@ -21,8 +26,15 @@ describe('[Challenge] Truster', function () {
         expect(await token.balanceOf(player.address)).to.equal(0);
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+=======
+    it('Exploit', async function () {
+        const attackerFactory = await ethers.getContractFactory('TrusterAttack', attacker);
+        const attackerContract = await attackerFactory.deploy(this.pool.address, this.token.address);
+        await attackerContract.attack();
+>>>>>>> Stashed changes
     });
 
     after(async function () {
